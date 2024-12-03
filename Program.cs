@@ -1,6 +1,6 @@
 ﻿namespace _2024
 {
-    public class Aoc2024
+    public class Program
     {
         public static RunArgs args = new RunArgs(0,false);
         static void Main(string[] _args)
@@ -8,7 +8,7 @@
             DateTime now = DateTime.Now;
             Console.Clear();
             Logger.Info("Started {0} @ {1}", now.ToShortDateString(), now.ToShortTimeString());
-            if (_args.Length < 1) throw new ArgumentOutOfRangeException("Specify a day, dipshit");
+            if (_args.Length < 1) throw new ArgumentOutOfRangeException("Please specify a day");
             int file = int.Parse(_args[0]);
             bool debug = false;
             if (_args.Length >= 2) bool.TryParse(_args[1], out debug);

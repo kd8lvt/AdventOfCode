@@ -1,17 +1,19 @@
 ﻿using _2024;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 public static class Day2
 {
-    static Aoc2024.RunArgs args = new Aoc2024.RunArgs(2,false);
-    public static bool Run(Aoc2024.RunArgs _args)
+    static Program.RunArgs args = new Program.RunArgs(2,false);
+    public static bool Run(Program.RunArgs _args)
     {
         args = _args;
         int ms = 0;
         string[] lines = Timers.TimeExecution("Read File", File.ReadAllLines, args.file,out ms);
         int[][] reports = Timers.TimeExecution("Parse Report Data", ParseReports, lines, out ms);
-        int safe = Timers.TimeExecution("Validate Reports", NumSafe, reports, out ms);
-        Logger.Result("Safe reports: {0}", safe);
+        int[] safeReports = Timers.TimeExecution("Validate Reports", NumSafe, reports, out ms);
+        Logger.Result("[Part 1] Safe reports: {0}", safeReports[0]);
+        Logger.Result("[Part 2] Safe reports: {0}", safeReports[0]+safeReports[1]);
         return true;
     }
 
@@ -68,13 +70,23 @@ public static class Day2
         return false;
     }
 
-    static int NumSafe(int[][] reports)
+    static int[] NumSafe(int[][] reports)
     {
-        int safe = 0;
+        int pt1Count = 0;
+        int unsafeCount = 0;
+        int pt2Count = 0;
+        int[][] unsafes = new int[reports.Length][];
         for (int i = 0; i < reports.Length; i++)
         {
-            safe += IsSafe(reports[i]) ? 1 : 0;
+            bool safe = IsSafe(reports[i],false);
+            if (!safe) 
+            {
+                unsafes[unsafeCount] = reports[i];
+                unsafeCount++;
+            }
+            else pt1Count++;
         }
-        return safe;
+        for (int i = 0; i < unsafeCount; i++) pt2Count += IsSafe(reports[i], true)?1:0;
+        return [pt1Count,pt2Count];
     }
 }

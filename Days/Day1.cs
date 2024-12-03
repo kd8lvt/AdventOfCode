@@ -2,12 +2,12 @@
 using System.Collections;
 public static class Day1
 {
-    static Aoc2024.RunArgs args = new Aoc2024.RunArgs(1, false);
-    public static bool Run(Aoc2024.RunArgs _args)
+    static Program.RunArgs args = new Program.RunArgs(1, false);
+    public static bool Run(Program.RunArgs _args)
     {
         args = _args;
-        bool debug = Aoc2024.args.debug;
-        string[] lines = Util.ReadFile(Aoc2024.args.file);
+        bool debug = Program.args.debug;
+        string[] lines = Util.ReadFile(Program.args.file);
 
         int[][] pairs = Timers.TimeExecution("Parse Value Pairs", ParsePairs, lines);
         Logger.Debug("Total Pairs: {0}", pairs[0].Length);

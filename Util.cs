@@ -52,7 +52,7 @@ public static class Logger
     public static void Debug(string format, params object[] formatArgs)
     {
         SetTextColor(ConsoleColor.DarkGray);
-        if (Aoc2024.args.debug) Log("DEBUG", format, formatArgs);
+        if (Program.args.debug) Log("DEBUG", format, formatArgs);
         ResetTextColor();
     }
 
