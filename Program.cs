@@ -2,10 +2,13 @@
 {
     public class Program
     {
+        public static Day d1 = new Day(1, Day1.Run);
+        public static Day d2 = new Day(2, Day2.Run);
+        public static Day d3 = new Day(3, Day3.Run);
         public static RunArgs args = new RunArgs(0,false);
         static void Main(string[] _args)
         {
-            DateTime now = DateTime.Now;
+        DateTime now = DateTime.Now;
             Console.Clear();
             Logger.Info("Started {0} @ {1}", now.ToShortDateString(), now.ToShortTimeString());
             if (_args.Length < 1) throw new ArgumentOutOfRangeException("Please specify a day");
@@ -13,15 +16,7 @@
             bool debug = false;
             if (_args.Length >= 2) bool.TryParse(_args[1], out debug);
             args = new RunArgs(file, debug);
-            switch (args.day)
-            {
-                case 1:
-                    Timers.TimeExecution("Everything", Day1.Run, args);
-                    break;
-                case 2:
-                    Timers.TimeExecution("Everything", Day2.Run, args);
-                    break;
-            }
+            Days.Run(args);
         }
 
         public record RunArgs
